@@ -10,8 +10,10 @@ import java.util.List;
  */
 public interface PersonDao {
 
-    List<PersonEntity> findAll() throws DaoException;
+    List<PersonEntity> find(long offset, long limit) throws DaoException;
 
-    void save(PersonEntity entity) throws DaoException;
+    PersonEntity save(PersonEntity entity) throws DaoException;
+
+    void update(PersonEntity entity) throws DaoException;
 
 }

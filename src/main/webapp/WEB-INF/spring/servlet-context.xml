@@ -14,8 +14,20 @@
 
     <mvc:annotation-driven/>
 
+    <mvc:resources mapping="//**" location="/WEB-INF/pages/"/>
+
+    <bean id="errorMessages" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+        <property name="locations" value="classpath:ValidationMessages.properties"/>
+    </bean>
+
+    <bean id="validationUtils" class="com.mk.notebook.util.ValidationUtils">
+        <constructor-arg name="properties" ref="errorMessages"/>
+    </bean>
+
     <bean id="dataAccessManager" class="com.mk.notebook.manager.DataAccessManager">
         <constructor-arg name="personDao" ref="personDao"/>
     </bean>
+
+    <bean id="objectMapper" class="com.fasterxml.jackson.databind.ObjectMapper"/>
 
 </beans>

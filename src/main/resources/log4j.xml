@@ -83,8 +83,12 @@
         <param name="file" value="${catalina.home}/logs/notebook.debug.log"/>
     </appender>
 
+    <!--<category name="org.springframework" additivity="false">-->
+        <!--<priority value="INFO"/>-->
+    <!--</category>-->
+
     <root>
-        <priority value="INFO"/>
+        <priority value="DEBUG"/>
         <appender-ref ref="INFO"/>
         <appender-ref ref="ERROR"/>
         <appender-ref ref="DEBUG"/>

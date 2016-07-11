@@ -10,9 +10,15 @@
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>
-            /META-INF/spring/dao-context.xml,
-            /WEB-INF/servlet-context.xml
+            /WEB-INF/spring/dao-context.xml,
+            /WEB-INF/spring/servlet-context.xml
         </param-value>
+    </context-param>
+    <context-param>
+        <param-name>
+            javax.faces.INTERPRET_EMPTY_STRING_SUBMITTED_VALUES_AS_NULL
+        </param-name>
+        <param-value>true</param-value>
     </context-param>
 
     <listener>
@@ -28,14 +34,14 @@
         </servlet-class>
         <init-param>
             <param-name>contextConfigLocation</param-name>
-            <param-value>/WEB-INF/dispatcher-servlet-context.xml</param-value>
+            <param-value>/WEB-INF/spring/servlet-context.xml</param-value>
         </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
 
     <servlet-mapping>
         <servlet-name>notebook</servlet-name>
-        <url-pattern>/</url-pattern>
+        <url-pattern>/*</url-pattern>
     </servlet-mapping>
 
 </web-app>

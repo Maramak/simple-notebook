@@ -1,10 +1,8 @@
 package com.mk.notebook.entity;
 
 import com.mk.notebook.entity.http.PersonRequestEntity;
-import org.apache.commons.lang3.StringUtils;
 
 import java.util.Date;
-import java.util.Objects;
 
 /**
  * @author Pavel Fursov
@@ -25,17 +23,11 @@ public class PersonEntity implements Entity {
     }
 
     public PersonEntity(final PersonRequestEntity entity) {
-        if (!Objects.isNull(entity.getId())) {
-            id = entity.getId();
-        }
-
-        if (StringUtils.isNotEmpty(entity.getMiddleName())) {
-            middleName = entity.getMiddleName();
-        }
-
+        id = entity.getId();
+        middleName = entity.getMiddleName();
         firstName = entity.getFirstName();
         lastName = entity.getLastName();
-        birthday = new Date(entity.getBirthday());
+        birthday = entity.getBirthday();
     }
 
     public Long getId() {
@@ -80,12 +72,7 @@ public class PersonEntity implements Entity {
 
     @Override
     public String toString() {
-        return "PersonEntity{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", middleName='" + middleName + '\'' +
-                ", birthday=" + birthday +
-                '}';
+        return String.format("PersonEntity{id = %d, firstName = %s, lastName = %s, middleName = %s, birthday = %s}",
+                id, firstName, lastName, middleName, birthday);
     }
 }
