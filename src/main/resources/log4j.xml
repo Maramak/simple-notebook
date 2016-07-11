@@ -24,6 +24,9 @@
 
         <!-- For Tomcat -->
         <param name="file" value="${catalina.home}/logs/notebook.log"/>
+
+        <!-- For JBoss -->
+        <!--<param name="file" value="${jboss.server.home.dir}/logs/notebook.debug.log"/>-->
     </appender>
 
     <appender name="INFO" class="org.apache.log4j.RollingFileAppender">
@@ -43,6 +46,9 @@
 
         <!-- For Tomcat -->
         <param name="file" value="${catalina.home}/logs/notebook.info.log"/>
+
+        <!-- For JBoss -->
+        <!--<param name="file" value="${jboss.server.home.dir}/logs/notebook.debug.log"/>-->
     </appender>
 
     <appender name="ERROR" class="org.apache.log4j.RollingFileAppender">
@@ -62,6 +68,9 @@
 
         <!-- For Tomcat -->
         <param name="file" value="${catalina.home}/logs/notebook.err.log"/>
+
+        <!-- For JBoss -->
+        <!--<param name="file" value="${jboss.server.home.dir}/logs/notebook.debug.log"/>-->
     </appender>
 
     <appender name="DEBUG" class="org.apache.log4j.RollingFileAppender">
@@ -81,6 +90,9 @@
 
         <!-- For Tomcat -->
         <param name="file" value="${catalina.home}/logs/notebook.debug.log"/>
+
+        <!-- For JBoss -->
+        <!--<param name="file" value="${jboss.server.home.dir}/logs/notebook.debug.log"/>-->
     </appender>
 
     <!--<category name="org.springframework" additivity="false">-->

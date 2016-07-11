@@ -4,20 +4,21 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.mk.notebook.util.Constants.APPLICATION_JSON_UTF_8;
 
 /**
  * @author Pavel Fursov
@@ -33,11 +34,14 @@ public class ExceptionResolver {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus
     private ResponseEntity<String> validationError(MethodArgumentNotValidException ex) {
+        final HttpHeaders headers = new HttpHeaders();
+        headers.add(HttpHeaders.CONTENT_TYPE, APPLICATION_JSON_UTF_8);
+
         BindingResult result = ex.getBindingResult();
         try {
-            return new ResponseEntity<>(getErrorsJson(result.getFieldErrors()), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(getErrorsJson(result.getFieldErrors()), headers, HttpStatus.BAD_REQUEST);
         } catch (IOException e) {
-            return new ResponseEntity<>(String.format("Error building response from: %s", ex.getMessage()),
+            return new ResponseEntity<>(String.format("Error building response from: %s", ex.getMessage()), headers,
                     HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }

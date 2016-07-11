@@ -10,6 +10,10 @@
         <jdbc:script location="classpath:db/sql/db-insert-data.sql"/>
     </jdbc:embedded-database>
 
+    <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
     <bean id="personDao" class="com.mk.notebook.dao.impl.PersonDaoImpl"/>
 
     <bean id="personFindAllQuery" class="com.mk.notebook.dao.mapping.query.PersonFindAllQuery">
@@ -21,6 +25,10 @@
     </bean>
 
     <bean id="personUpdateQuery" class="com.mk.notebook.dao.mapping.query.PersonUpdateQuery">
+        <constructor-arg name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <bean id="personFindByIdQuery" class="com.mk.notebook.dao.mapping.query.PersonFindByIdQuery">
         <constructor-arg name="dataSource" ref="dataSource"/>
     </bean>
 

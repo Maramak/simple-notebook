@@ -71,6 +71,22 @@ public class PersonEntity implements Entity {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        PersonEntity entity = (PersonEntity) o;
+
+        return id != null ? id.equals(entity.id) : entity.id == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        return id != null ? id.hashCode() : 0;
+    }
+
+    @Override
     public String toString() {
         return String.format("PersonEntity{id = %d, firstName = %s, lastName = %s, middleName = %s, birthday = %s}",
                 id, firstName, lastName, middleName, birthday);

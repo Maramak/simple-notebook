@@ -50,22 +50,37 @@ public class PersonController {
             @RequestParam(value = Constants.OFFSET, required = false)
             final Long offset,
 
-            @RequestParam(value = Constants.LIMIT)
+            @RequestParam(value = Constants.LIMIT, required = false)
             final Long limit) {
 
         try {
-            validationUtils.checkLimit(limit);
-
             final List<PersonEntity> personEntities = dataAccessManager.getAllPersons(offset, limit);
             if (LOG.isDebugEnabled()) {
                 LOG.debug(String.format("Received %d person entities", personEntities.size()));
             }
 
             return ResponseEntity.ok(objectMapper.writeValueAsString(personEntities));
-        } catch (ValidationException e) {
-            LOG.error(e.getMessage(), e);
+        } catch (ApplicationException e) {
+            LOG.error(String.format("Unable to receive persons list: %s", e.getMessage()), e);
 
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        } catch (Exception e) {
+            LOG.error(String.format("Something really bad have happened: %s", e.getMessage()), e);
+
+            return new ResponseEntity<>(e.toString(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @RequestMapping(value = "/user", method = RequestMethod.GET, produces = {APPLICATION_JSON_UTF_8})
+    @ResponseBody
+    public ResponseEntity<String> getUser(@RequestParam(value = Constants.ID) final Long id) {
+        try {
+            final PersonEntity personEntity = dataAccessManager.getPerson(id);
+            if (LOG.isDebugEnabled()) {
+                LOG.debug(String.format("Found person: %s", personEntity));
+            }
+
+            return ResponseEntity.ok(objectMapper.writeValueAsString(personEntity));
         } catch (ApplicationException e) {
             LOG.error(String.format("Unable to receive persons list: %s", e.getMessage()), e);
 

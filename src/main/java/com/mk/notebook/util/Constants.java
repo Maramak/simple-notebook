@@ -7,6 +7,8 @@ public class Constants {
 
     // ----------------- Request Params
 
+    public static final String ID = "id";
+
     public static final String LIMIT = "limit";
 
     public static final String OFFSET = "offset";

@@ -22,7 +22,15 @@ public class DataAccessManager {
             offset = 0L;
         }
 
+        if (limit == null) {
+            limit = 100L;
+        }
+
         return personDao.find(offset, limit);
+    }
+
+    public PersonEntity getPerson(Long id) throws DaoException {
+        return personDao.findById(id);
     }
 
     public PersonEntity savePerson(final PersonEntity entity) throws DaoException {

@@ -12,6 +12,8 @@ public interface PersonDao {
 
     List<PersonEntity> find(long offset, long limit) throws DaoException;
 
+    PersonEntity findById(long id) throws DaoException;
+
     PersonEntity save(PersonEntity entity) throws DaoException;
 
     void update(PersonEntity entity) throws DaoException;

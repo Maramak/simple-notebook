@@ -2,6 +2,7 @@ package com.mk.notebook.dao.impl;
 
 import com.mk.notebook.dao.PersonDao;
 import com.mk.notebook.dao.mapping.query.PersonFindAllQuery;
+import com.mk.notebook.dao.mapping.query.PersonFindByIdQuery;
 import com.mk.notebook.dao.mapping.query.PersonSaveQuery;
 import com.mk.notebook.dao.mapping.query.PersonUpdateQuery;
 import com.mk.notebook.entity.PersonEntity;
@@ -16,7 +17,10 @@ import java.util.List;
 public class PersonDaoImpl implements PersonDao {
 
     @Autowired
-    private PersonFindAllQuery findAllQuery;
+    private PersonFindAllQuery findAll;
+
+    @Autowired
+    private PersonFindByIdQuery findById;
 
     @Autowired
     private PersonSaveQuery saveQuery;
@@ -26,7 +30,12 @@ public class PersonDaoImpl implements PersonDao {
 
     @Override
     public List<PersonEntity> find(long offset, long limit) throws DaoException {
-        return findAllQuery.find(offset, limit);
+        return findAll.find(offset, limit);
+    }
+
+    @Override
+    public PersonEntity findById(long id) throws DaoException {
+        return findById.find(id);
     }
 
     @Override

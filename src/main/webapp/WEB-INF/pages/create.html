@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <title>Notebook</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/jquery-ui.css">
+
+    <script src="jquery/jquery-2.1.0.min.js"></script>
+    <script src="jquery/jquery-ui.min.js"></script>
+
+    <script src="create.js"></script>
+
+    <script>
+        $(function () {
+            $('#datepicker').datepicker({
+                dateFormat: "yy-mm-dd"
+            });
+        });
+    </script>
+</head>
+<body>
+<div id="page-wrapper">
+    <h1>Add new person</h1>
+
+    <div id="form-messages"></div>
+    <form id="ajax-person-add">
+        <div class="field">
+            <label for="firstName">First name:</label>
+            <input type="text" id="firstName" name="first_name" required>
+        </div>
+
+        <div class="field">
+            <label for="lastName">Last name:</label>
+            <input type="text" id="lastName" name="last_name" required>
+        </div>
+
+        <div class="field">
+            <label for="middleName">Middle name:</label>
+            <input type="text" id="middleName" name="middle_name">
+        </div>
+
+        <div class="field">
+            <label for="datepicker">Birthday:</label>
+            <input type="text" id="datepicker" name="birthday" required>
+        </div>
+
+        <div class="field">
+            <button type="submit">Add</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>
