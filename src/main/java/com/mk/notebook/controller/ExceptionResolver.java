@@ -39,7 +39,10 @@ public class ExceptionResolver {
 
         BindingResult result = ex.getBindingResult();
         try {
-            return new ResponseEntity<>(getErrorsJson(result.getFieldErrors()), headers, HttpStatus.BAD_REQUEST);
+            final String errorsJson = getErrorsJson(result.getFieldErrors());
+            LOG.warn(String.format("Validation failed: %s", errorsJson));
+
+            return new ResponseEntity<>(errorsJson, headers, HttpStatus.BAD_REQUEST);
         } catch (IOException e) {
             return new ResponseEntity<>(String.format("Error building response from: %s", ex.getMessage()), headers,
                     HttpStatus.INTERNAL_SERVER_ERROR);
