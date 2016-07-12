@@ -100,10 +100,10 @@
     </category>
 
     <root>
-        <!--<priority value="DEBUG"/>-->
-        <appender-ref ref="INFO"/>
-        <appender-ref ref="ERROR"/>
+        <priority value="DEBUG"/>
         <appender-ref ref="DEBUG"/>
+        <appender-ref ref="ERROR"/>
+        <appender-ref ref="INFO"/>
         <appender-ref ref="DATAFILE"/>
         <appender-ref ref="CONSOLE"/>
     </root>
