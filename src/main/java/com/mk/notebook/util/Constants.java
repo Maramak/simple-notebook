@@ -21,4 +21,12 @@ public class Constants {
 
     public static final String LIMIT_BELOW_ZERO = "limit.below.zero";
 
+    // ----------------- Other
+
+    public static final String DATE_FORMAT = "yyyy-MM-dd";
+
+    public static final String DEFAULT_OFFSET = "0";
+
+    public static final String DEFAULT_LIMIT = "100";
+
 }

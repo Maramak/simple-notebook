@@ -1,6 +1,7 @@
 package com.mk.notebook.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.mk.notebook.entity.PersonEntity;
 import com.mk.notebook.entity.http.PersonRequestEntity;
 import com.mk.notebook.exception.ApplicationException;
@@ -22,9 +23,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.validation.Valid;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import static com.mk.notebook.util.Constants.APPLICATION_JSON_UTF_8;
+import static com.mk.notebook.util.Constants.DATE_FORMAT;
+import static com.mk.notebook.util.Constants.DEFAULT_LIMIT;
+import static com.mk.notebook.util.Constants.DEFAULT_OFFSET;
 
 /**
  * @author Pavel Fursov
@@ -41,16 +46,23 @@ public class PersonController {
     @Autowired
     private ValidationUtils validationUtils;
 
+    private final ObjectMapper objectMapper;
+
     @Autowired
-    private ObjectMapper objectMapper;
+    public PersonController(ObjectMapper objectMapper) {
+        objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
+        objectMapper.setDateFormat(new SimpleDateFormat(DATE_FORMAT));
+
+        this.objectMapper = objectMapper;
+    }
 
     @RequestMapping(value = "/list", method = RequestMethod.GET, produces = {APPLICATION_JSON_UTF_8})
     @ResponseBody
     public ResponseEntity<String> listPersons(
-            @RequestParam(value = Constants.OFFSET, required = false)
+            @RequestParam(value = Constants.OFFSET, required = false, defaultValue = DEFAULT_OFFSET)
             final Long offset,
 
-            @RequestParam(value = Constants.LIMIT, required = false)
+            @RequestParam(value = Constants.LIMIT, required = false, defaultValue = DEFAULT_LIMIT)
             final Long limit) {
 
         try {

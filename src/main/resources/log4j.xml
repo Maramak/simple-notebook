@@ -23,10 +23,10 @@
         </layout>
 
         <!-- For Tomcat -->
-        <param name="file" value="${catalina.home}/logs/notebook.log"/>
+        <!--<param name="file" value="${catalina.home}/logs/notebook.log"/>-->
 
         <!-- For JBoss -->
-        <!--<param name="file" value="${jboss.server.home.dir}/logs/notebook.debug.log"/>-->
+        <param name="file" value="${jboss.server.log.dir}/notebook.log"/>
     </appender>
 
     <appender name="INFO" class="org.apache.log4j.RollingFileAppender">
@@ -45,10 +45,10 @@
         </filter>
 
         <!-- For Tomcat -->
-        <param name="file" value="${catalina.home}/logs/notebook.info.log"/>
+        <!--<param name="file" value="${catalina.home}/logs/notebook.info.log"/>-->
 
         <!-- For JBoss -->
-        <!--<param name="file" value="${jboss.server.home.dir}/logs/notebook.debug.log"/>-->
+        <param name="file" value="${jboss.server.log.dir}/notebook.info.log"/>
     </appender>
 
     <appender name="ERROR" class="org.apache.log4j.RollingFileAppender">
@@ -67,10 +67,10 @@
         </filter>
 
         <!-- For Tomcat -->
-        <param name="file" value="${catalina.home}/logs/notebook.err.log"/>
+        <!--<param name="file" value="${catalina.home}/logs/notebook.err.log"/>-->
 
         <!-- For JBoss -->
-        <!--<param name="file" value="${jboss.server.home.dir}/logs/notebook.debug.log"/>-->
+        <param name="file" value="${jboss.server.log.dir}/notebook.err.log"/>
     </appender>
 
     <appender name="DEBUG" class="org.apache.log4j.RollingFileAppender">
@@ -89,18 +89,18 @@
         </filter>
 
         <!-- For Tomcat -->
-        <param name="file" value="${catalina.home}/logs/notebook.debug.log"/>
+        <!--<param name="file" value="${catalina.home}/logs/notebook.debug.log"/>-->
 
         <!-- For JBoss -->
-        <!--<param name="file" value="${jboss.server.home.dir}/logs/notebook.debug.log"/>-->
+        <param name="file" value="${jboss.server.log.dir}/notebook.debug.log"/>
     </appender>
 
-    <!--<category name="org.springframework" additivity="false">-->
-        <!--<priority value="INFO"/>-->
-    <!--</category>-->
+    <category name="org.springframework" additivity="false">
+        <priority value="INFO"/>
+    </category>
 
     <root>
-        <priority value="DEBUG"/>
+        <!--<priority value="DEBUG"/>-->
         <appender-ref ref="INFO"/>
         <appender-ref ref="ERROR"/>
         <appender-ref ref="DEBUG"/>

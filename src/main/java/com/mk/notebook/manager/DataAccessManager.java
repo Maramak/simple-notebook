@@ -18,14 +18,6 @@ public class DataAccessManager {
     }
 
     public List<PersonEntity> getAllPersons(Long offset, Long limit) throws DaoException {
-        if (offset == null) {
-            offset = 0L;
-        }
-
-        if (limit == null) {
-            limit = 100L;
-        }
-
         return personDao.find(offset, limit);
     }
 
